@@ -1,7 +1,13 @@
 let arr = [];
-let circleN = 50;
+let circleN = 65;
 let lineDist = 150;
 let fadeIn = 0;
+
+// window.addEventListener('resize', resizeCanvas, false);
+
+// function resizeCanvas(){
+	
+// }
 
 function circle(x, y, radius){
 	this.x = x;
@@ -96,7 +102,7 @@ function draw(){
 	}
 	noStroke();
 	if(fadeIn <= 1){
-		fadeIn += 0.005;
+		fadeIn += 0.01;
 		fill('rgba(255, 255, 255,'+ fadeIn+')');
 		//stroke('rgba(255, 255, 255,'+ textFadeIn+')');
 		//console.log(textFadeIn);
