@@ -1,6 +1,7 @@
 let arr = [];
 let circleN = 50;
 let lineDist = 150;
+let fadeIn = 0;
 
 function circle(x, y, radius){
 	this.x = x;
@@ -70,18 +71,39 @@ function draw(){
 			if(dist < lineDist){
 				let alpha = 1 - (dist/lineDist);
 				//console.log(alpha);
-				stroke('rgba(255, 255, 255,' + alpha+')');
+				if(fadeIn <= alpha){
+					stroke('rgba(255, 255, 255,' + fadeIn +')');
+				}else{
+					stroke('rgba(255, 255, 255,' + alpha +')');
+				}
 				//fill(0,0, 0,alpha);
 				line(arr[i].x, arr[i].y, arr[j].x, arr[j].y);
 			}
 		}
 	}
-	stroke('rgba(255,255,255,0.75)');
-	fill('rgba(255,255,255,0.75)');
+	
+	if(fadeIn <= 0.75){
+		stroke('rgba(255, 255, 255,' + fadeIn +')');
+		fill('rgba(255,255,255, ' + fadeIn + ')');
+	}else{
+		stroke('rgba(255,255,255,0.75)');
+		fill('rgba(255,255,255,0.75)');
+	}
+
 	for(let i = 0; i < circleN; i++){
 		ellipse(arr[i].x, arr[i].y, arr[i].radius, arr[i].radius);
 		arr[i].move();
 	}
-	fill(255);
+	noStroke();
+	if(fadeIn <= 1){
+		fadeIn += 0.005;
+		fill('rgba(255, 255, 255,'+ fadeIn+')');
+		//stroke('rgba(255, 255, 255,'+ textFadeIn+')');
+		//console.log(textFadeIn);
+	}else{
+		fill(255);
+		//stroke(255);
+	}
+	//fill('rgba(255, 255, 255)');
 	text('Welcome User', window.innerWidth/2, window.innerHeight/2);
 }
